@@ -1,5 +1,7 @@
 import time
 import unittest
+import os
+import sys
 from webbrowser import Chrome
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -12,8 +14,8 @@ from selenium.webdriver.support import expected_conditions as EC
 class TestGoogleUseCase(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome("/users/perfectson/Documents/Testing/Selenium boilerplate/Selenium-Python-Boilerplate/tests/chromedriver")
-#djksajdkasjd
+        self.driver = webdriver.Chrome(os.path.join(sys.path[0], "chromedriver"))
+        
     def test_google_use_case(self):
         driver = self.driver
         driver.get("https://www.google.com/maps")
