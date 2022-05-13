@@ -25,7 +25,7 @@ class TestGoogleUseCase(unittest.TestCase):
         elem = driver.find_element(By.ID, "searchbox-searchbutton")
         elem.click()
         time.sleep(0.5)
-        elem = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "h1.DUwDvf.fontHeadlineLarge"))).text
+        elem = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#pane h1"))).text
         self.assertEqual("Doonbeg",elem,"Not equal")
         print(f"'Doonbeg' is in the searchbox.")
         time.sleep(1)
@@ -35,7 +35,7 @@ class TestGoogleUseCase(unittest.TestCase):
         aria_label = elem.get_attribute("aria-label")
         self.assertIn("Doonbeg",aria_label,"Not in field")
         print(f"'Doonbeg' is in '{aria_label}'.")
-        time.sleep(3)
+        time.sleep(2)
 
 
 
