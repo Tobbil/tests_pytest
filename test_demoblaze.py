@@ -75,6 +75,7 @@ class TestDemoblazeAddToCart(unittest.TestCase):
         checkout_elements[3].send_keys(test_data["card"])
         checkout_elements[4].send_keys(test_data["month"])
         checkout_elements[5].send_keys(test_data["year"])
+        time.sleep(1)
         element = main_page.test_submit_purchase()
         element.click()
         # tu assert danych w alercie
