@@ -1,8 +1,10 @@
+import time
 from element import BasePageElement
 from locators import MainPageLocators
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
@@ -83,7 +85,9 @@ class MainPage(BasePage):
 
     def test_cart_total(self):
 
-        while True:
+        timeout = time.time() + 10  
+
+        while time.time() < timeout:
 
             element = self.handle_exceptions(MainPageLocators.CART_TOTAL)
             if len(element.text) > 0:
@@ -114,6 +118,37 @@ class MainPage(BasePage):
         element = self.handle_exceptions(MainPageLocators.PLACE_ORDER_BUTTON)
 
         return element
+
+    def test_total_in_checkout(self):
+
+        timeout = time.time() + 10  
+
+        while time.time() < timeout:
+
+            element = self.handle_exceptions(MainPageLocators.CHECKOUT_TOTAL)
+            if len(element.text) > 0:
+                break
+
+        return element
+
+    def test_fill_out_checkout_form(self):
+        
+        checkout_name = self.handle_exceptions(MainPageLocators.CHECKOUT_FORM_NAME)
+        checkout_country = self.handle_exceptions(MainPageLocators.CHECKOUT_FORM_COUNTRY)
+        checkout_city = self.handle_exceptions(MainPageLocators.CHECKOUT_FORM_CITY)
+        checkout_card = self.handle_exceptions(MainPageLocators.CHECKOUT_FORM_CARD)
+        checkout_month = self.handle_exceptions(MainPageLocators.CHECKOUT_FORM_MONTH)
+        checkout_year = self.handle_exceptions(MainPageLocators.CHECKOUT_FORM_YEAR)
+
+        return checkout_name, checkout_country, checkout_city, checkout_card, checkout_month, checkout_year
+        
+    def test_submit_purchase(self):
+
+        return self.handle_exceptions(MainPageLocators.CHECKOUT_SUBMIT_BUTTON)
+
+    def test_OK_button_purchase(self):
+
+        return self.handle_exceptions(MainPageLocators.CHECKOUT_OK_BUTTON)
 
 
 class SearchResultsPage(BasePage):

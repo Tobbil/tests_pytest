@@ -15,18 +15,24 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class TestDemoblazeAddToCart(unittest.TestCase):
 
+    test_data = {"name":"Mr Test","country":"Norway","city":"Tromsø",
+                "card":"4376232127005830","month":"May","year":"2022"}
+
     def setUp(self):
         self.driver = webdriver.Chrome(os.path.join(sys.path[0], "chromedriver"))
         self.driver.get("https://www.demoblaze.com/")
         
     def test_add_to_cart(self):
         driver = self.driver
+        test_data = self.test_data
+        driver.implicitly_wait(10)
         main_page = page.MainPage(driver)
         main_page.click_menu_phones()
         element = main_page.test_price_in_list()
         self.assertEqual("$360",element.text)
         element = main_page.test_phone_name_in_list()
         self.assertEqual("Samsung galaxy s6",element.text)
+        element = main_page.test_phone_name_in_list()
         element.click()
         element = main_page.test_price_in_item_page()
         price_add_to_cart_trimmed = element.text.replace(" *includes tax","")
@@ -59,11 +65,23 @@ class TestDemoblazeAddToCart(unittest.TestCase):
         element = main_page.test_place_order_button()
         self.assertEqual("Place Order",element.text)
         element.click()
-        time.sleep(3)
-        #elem = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#pane h1"))).text
+        element = main_page.test_total_in_checkout()
+        price_checkout_trimmed = element.text.replace("Total: ","")
+        self.assertEqual(price_checkout_trimmed,"360")
+        checkout_elements = main_page.test_fill_out_checkout_form()
+        checkout_elements[0].send_keys(test_data["name"])
+        checkout_elements[1].send_keys(test_data["country"])
+        checkout_elements[2].send_keys(test_data["city"])
+        checkout_elements[3].send_keys(test_data["card"])
+        checkout_elements[4].send_keys(test_data["month"])
+        checkout_elements[5].send_keys(test_data["year"])
+        element = main_page.test_submit_purchase()
+        element.click()
+        # tu assert danych w alercie
         
-
-
+        # tu assert danych w alercie
+        element = main_page.test_OK_button_purchase()
+        element.click()
 
     def tearDown(self):
         self.driver.close()

@@ -16,6 +16,15 @@ class MainPageLocators(object):
     CART_TOTAL = (By.XPATH, "//*[@id='totalp']")
     TABLE = (By.CLASS_NAME, "success") 
     PLACE_ORDER_BUTTON = (By.CLASS_NAME, "btn.btn-success")
+    CHECKOUT_TOTAL = (By.CSS_SELECTOR, "#orderModal #totalm")
+    CHECKOUT_FORM_NAME = (By.CSS_SELECTOR, "#orderModal #name")
+    CHECKOUT_FORM_COUNTRY = (By.CSS_SELECTOR, "#orderModal #country")
+    CHECKOUT_FORM_CITY = (By.CSS_SELECTOR, "#orderModal #city")
+    CHECKOUT_FORM_CARD = (By.CSS_SELECTOR, "#orderModal #card")
+    CHECKOUT_FORM_MONTH = (By.CSS_SELECTOR, "#orderModal #month")
+    CHECKOUT_FORM_YEAR = (By.CSS_SELECTOR, "#orderModal #year")
+    CHECKOUT_SUBMIT_BUTTON = (By.CSS_SELECTOR, "#orderModal button.btn.btn-primary")
+    CHECKOUT_OK_BUTTON = (By.CSS_SELECTOR, "button.confirm.btn.btn-lg.btn-primary")
 
 class SearchResultsPageLocators(object):
     """A class for search results locators. All search results locators should
