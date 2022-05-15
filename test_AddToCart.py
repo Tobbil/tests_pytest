@@ -71,7 +71,7 @@ class TestAddToCart(WebDriverSetup):
         checkout_elements[3].send_keys(test_data["card"])
         checkout_elements[4].send_keys(test_data["month"])
         checkout_elements[5].send_keys(test_data["year"])
-        time.sleep(2)
+        time.sleep(1)
         element = checkout_page.get_submit_purchase()
         element.click()
         # tu assert danych w alercie
