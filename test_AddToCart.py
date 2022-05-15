@@ -1,15 +1,12 @@
+import sys
 import time
 import unittest
 import os
-import sys
-import page
+import page 
 from WebDriverSetup import WebDriverSetup
 from webbrowser import Chrome
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import StaleElementReferenceException
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -21,10 +18,12 @@ class TestDemoblazeAddToCart(WebDriverSetup):
         
     def test_add_to_cart(self):
         driver = self.driver
-        driver.get("https://www.demoblaze.com/")
         test_data = self.test_data
         driver.implicitly_wait(10)
+        driver.get("https://www.demoblaze.com/")
         main_page = page.MainPage(driver)
+        cart_page = page.CartPage(driver)
+        checkout_page = page.CheckoutPage(driver)
         main_page.click_menu_phones()
         element = main_page.get_price_in_list()
         self.assertEqual("$360",element.text)
@@ -50,23 +49,23 @@ class TestDemoblazeAddToCart(WebDriverSetup):
         alert.accept()
         element = main_page.get_go_to_cart()
         element.click()
-        self.assertTrue(main_page.test_cart_content())
-        element = main_page.get_cart_total()
+        self.assertTrue(cart_page.test_cart_content())
+        element = cart_page.get_cart_total()
         self.assertIn(element.text,"$360")
-        element = main_page.get_price_in_table()
+        element = cart_page.get_price_in_table()
         self.assertIn(element.text,"$360")
-        element = main_page.get_phone_name_in_table()
+        element = cart_page.get_phone_name_in_table()
         self.assertEqual("Samsung galaxy s6",element.text)
         # tu test dla delete
 
         # tu test dla delete
-        element = main_page.get_place_order_button()
+        element = cart_page.get_place_order_button()
         self.assertEqual("Place Order",element.text)
         element.click()
-        element = main_page.get_total_in_checkout()
+        element = checkout_page.get_total_in_checkout()
         price_checkout_trimmed = element.text.replace("Total: ","")
         self.assertEqual(price_checkout_trimmed,"360")
-        checkout_elements = main_page.get_checkout_form()
+        checkout_elements = checkout_page.get_checkout_form()
         checkout_elements[0].send_keys(test_data["name"])
         checkout_elements[1].send_keys(test_data["country"])
         checkout_elements[2].send_keys(test_data["city"])
@@ -74,12 +73,12 @@ class TestDemoblazeAddToCart(WebDriverSetup):
         checkout_elements[4].send_keys(test_data["month"])
         checkout_elements[5].send_keys(test_data["year"])
         time.sleep(2)
-        element = main_page.get_submit_purchase()
+        element = checkout_page.get_submit_purchase()
         element.click()
         # tu assert danych w alercie
         
         # tu assert danych w alercie
-        element = main_page.get_OK_button_purchase()
+        element = checkout_page.get_OK_button_purchase()
         element.click()
 
 if __name__ == "__main__":

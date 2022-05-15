@@ -1,7 +1,9 @@
+from lib2to3.pgen2 import driver
 from re import S
+import sys
 import time
 from element import BasePageElement
-from locators import MainPageLocators
+from locators import ContactPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
@@ -11,7 +13,20 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 
 
-class MainPage(object):
+
+class BasePage:
+
+    def handle_exceptions(self, object):
+
+        try:
+            element = self.driver.find_element(*object)
+
+        except (StaleElementReferenceException, NoSuchElementException):
+            element = WebDriverWait(self.driver,50).until(EC.presence_of_element_located(object))
+            
+        return element 
+
+class MainPage(BasePage):
 
     def __init__(self, driver):
 
@@ -24,31 +39,6 @@ class MainPage(object):
         self.DESCRIPTION_IN_ITEM_PAGE = MainPageLocators.DESCRIPTION_IN_ITEM_PAGE
         self.ADD_TO_CART_BUTTON = MainPageLocators.ADD_TO_CART_BUTTON
         self.GO_TO_CART = MainPageLocators.GO_TO_CART
-        self.CART = MainPageLocators.CART
-        self.CART_CHILDREN = MainPageLocators.CART_CHILDREN
-        self.CART_TOTAL = MainPageLocators.CART_TOTAL
-        self.TABLE = MainPageLocators.TABLE
-        self.PLACE_ORDER_BUTTON = MainPageLocators.PLACE_ORDER_BUTTON
-        self.CHECKOUT_TOTAL = MainPageLocators.CHECKOUT_TOTAL
-        self.CHECKOUT_FORM_NAME = MainPageLocators.CHECKOUT_FORM_NAME
-        self.CHECKOUT_FORM_COUNTRY = MainPageLocators.CHECKOUT_FORM_COUNTRY
-        self.CHECKOUT_FORM_CITY = MainPageLocators.CHECKOUT_FORM_CITY
-        self.CHECKOUT_FORM_CARD = MainPageLocators.CHECKOUT_FORM_CARD
-        self.CHECKOUT_FORM_MONTH = MainPageLocators.CHECKOUT_FORM_MONTH
-        self.CHECKOUT_FORM_YEAR = MainPageLocators.CHECKOUT_FORM_YEAR
-        self.CHECKOUT_SUBMIT_BUTTON = MainPageLocators.CHECKOUT_SUBMIT_BUTTON
-        self.CHECKOUT_OK_BUTTON = MainPageLocators.CHECKOUT_OK_BUTTON
-
-
-    def handle_exceptions(self, object):
-
-        try:
-            element = self.driver.find_element(*object)
-
-        except (StaleElementReferenceException, NoSuchElementException):
-            element = WebDriverWait(self.driver,50).until(EC.presence_of_element_located(object))
-            
-        return element        
 
     def click_menu_phones(self):
         
@@ -85,6 +75,17 @@ class MainPage(object):
     def get_go_to_cart(self):
 
         return self.handle_exceptions(self.GO_TO_CART)
+
+class CartPage(BasePage):
+
+    def __init__(self,driver):
+
+        self.driver = driver
+        self.CART = CartPageLocators.CART
+        self.CART_CHILDREN = CartPageLocators.CART_CHILDREN
+        self.CART_TOTAL = CartPageLocators.CART_TOTAL
+        self.TABLE = CartPageLocators.TABLE
+        self.PLACE_ORDER_BUTTON = CartPageLocators.PLACE_ORDER_BUTTON
 
     def test_cart_content(self):
 
@@ -129,6 +130,21 @@ class MainPage(object):
 
         return element
 
+class CheckoutPage(BasePage):
+
+    def __init__(self,driver):
+
+        self.driver = driver
+        self.CHECKOUT_TOTAL = CheckoutPageLocators.CHECKOUT_TOTAL
+        self.CHECKOUT_FORM_NAME = CheckoutPageLocators.CHECKOUT_FORM_NAME
+        self.CHECKOUT_FORM_COUNTRY = CheckoutPageLocators.CHECKOUT_FORM_COUNTRY
+        self.CHECKOUT_FORM_CITY = CheckoutPageLocators.CHECKOUT_FORM_CITY
+        self.CHECKOUT_FORM_CARD = CheckoutPageLocators.CHECKOUT_FORM_CARD
+        self.CHECKOUT_FORM_MONTH = CheckoutPageLocators.CHECKOUT_FORM_MONTH
+        self.CHECKOUT_FORM_YEAR = CheckoutPageLocators.CHECKOUT_FORM_YEAR
+        self.CHECKOUT_SUBMIT_BUTTON = CheckoutPageLocators.CHECKOUT_SUBMIT_BUTTON
+        self.CHECKOUT_OK_BUTTON = CheckoutPageLocators.CHECKOUT_OK_BUTTON
+
     def get_total_in_checkout(self):
 
         timeout = time.time() + 10  
@@ -159,3 +175,36 @@ class MainPage(object):
     def get_OK_button_purchase(self):
 
         return self.handle_exceptions(self.CHECKOUT_OK_BUTTON)
+
+class ContactPage(BasePage):
+
+    def __init__(self, driver):
+
+        self.driver = driver
+        self.CONTACT = ContactPageLocators.CONTACT
+        self.CONTACT_EMAIL = ContactPageLocators.CONTACT_EMAIL
+        self.CONTACT_NAME = ContactPageLocators.CONTACT_NAME
+        self.CONTACT_MESSAGE = ContactPageLocators.CONTACT_MESSAGE
+        self.CONTACT_SEND_BUTTON = ContactPageLocators.CONTACT_SEND_BUTTON
+
+    def click_contact_link(self):
+
+        element = self.handle_exceptions(self.CONTACT)
+        element.click()
+
+    def get_contact_email_field(self):
+
+        return self.handle_exceptions(self.CONTACT_EMAIL)
+
+    def get_contact_name_field(self):
+
+        return self.handle_exceptions(self.CONTACT_NAME)
+        
+    def get_contact_message_field(self):
+
+        return self.handle_exceptions(self.CONTACT_MESSAGE)
+
+    def click_send_button(self):
+
+        element = self.handle_exceptions(self.CONTACT_SEND_BUTTON)
+        element.click()
