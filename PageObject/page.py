@@ -3,7 +3,7 @@ from re import S
 import sys
 import time
 from element import BasePageElement
-from locators import ContactPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators
+from locators import ContactPageLocators, LogInPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators, SignUpPageLocators
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
@@ -39,11 +39,34 @@ class MainPage(BasePage):
         self.DESCRIPTION_IN_ITEM_PAGE = MainPageLocators.DESCRIPTION_IN_ITEM_PAGE
         self.ADD_TO_CART_BUTTON = MainPageLocators.ADD_TO_CART_BUTTON
         self.GO_TO_CART = MainPageLocators.GO_TO_CART
+        self.CONTACT = MainPageLocators.CONTACT
+        self.SIGN_UP = MainPageLocators.SIGN_UP
+        self.LOG_IN = MainPageLocators.LOG_IN
+        self.USERNAME_IN_MENU = MainPageLocators.USERNAME_IN_MENU
 
     def click_menu_phones(self):
         
         element = self.handle_exceptions(self.MENU_PHONES)
         element.click()
+
+    def click_contact_link(self):
+
+        element = self.handle_exceptions(self.CONTACT)
+        element.click()
+
+    def click_signup_link(self):
+
+        element = self.handle_exceptions(self.SIGN_UP)
+        element.click()
+
+    def click_login_link(self):
+
+        element = self.handle_exceptions(self.LOG_IN)
+        element.click()
+
+    def get_username_in_menu(self):
+
+        return self.handle_exceptions(self.USERNAME_IN_MENU)
 
     def get_price_in_list(self):
 
@@ -181,16 +204,10 @@ class ContactPage(BasePage):
     def __init__(self, driver):
 
         self.driver = driver
-        self.CONTACT = ContactPageLocators.CONTACT
         self.CONTACT_EMAIL = ContactPageLocators.CONTACT_EMAIL
         self.CONTACT_NAME = ContactPageLocators.CONTACT_NAME
         self.CONTACT_MESSAGE = ContactPageLocators.CONTACT_MESSAGE
         self.CONTACT_SEND_BUTTON = ContactPageLocators.CONTACT_SEND_BUTTON
-
-    def click_contact_link(self):
-
-        element = self.handle_exceptions(self.CONTACT)
-        element.click()
 
     def get_contact_email_field(self):
 
@@ -208,3 +225,48 @@ class ContactPage(BasePage):
 
         element = self.handle_exceptions(self.CONTACT_SEND_BUTTON)
         element.click()
+
+class SignUpPage(BasePage):
+
+    def __init__(self,driver):
+
+        self.driver = driver
+        self.USERNAME = SignUpPageLocators.USERNAME
+        self.PASSWORD = SignUpPageLocators.PASSWORD
+        self.SIGN_UP_BUTTON = SignUpPageLocators.SIGN_UP_BUTTON
+
+    def get_username_field(self):
+
+        return self.handle_exceptions(self.USERNAME)
+
+    def get_password_field(self):
+
+        return self.handle_exceptions(self.PASSWORD)
+
+    def click_signup_button(self):
+
+        element = self.handle_exceptions(self.SIGN_UP_BUTTON)
+        element.click()
+
+class LogInPage(BasePage):
+
+    def __init__(self,driver):
+
+        self.driver = driver
+        self.USERNAME = LogInPageLocators.USERNAME
+        self.PASSWORD = LogInPageLocators.PASSWORD
+        self.LOGIN_BUTTON = LogInPageLocators.LOGIN_BUTTON
+
+    def get_username_field(self):
+
+        return self.handle_exceptions(self.USERNAME)
+
+    def get_password_field(self):
+
+        return self.handle_exceptions(self.PASSWORD)
+
+    def click_login_button(self):
+
+        element = self.handle_exceptions(self.LOGIN_BUTTON)
+        element.click()
+

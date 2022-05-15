@@ -11,6 +11,10 @@ class MainPageLocators(object):
     DESCRIPTION_IN_ITEM_PAGE = (By.CSS_SELECTOR, "#more-information p")
     ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "#tbodyid a.btn.btn-success.btn-lg")
     GO_TO_CART = (By.CSS_SELECTOR, "#cartur")
+    CONTACT = (By.LINK_TEXT, "Contact")
+    SIGN_UP = (By.ID, "signin2")
+    LOG_IN = (By.ID, "login2")
+    USERNAME_IN_MENU = (By.ID, "nameofuser")
 
 class CartPageLocators(object):
 
@@ -34,8 +38,19 @@ class CheckoutPageLocators(object):
 
 class ContactPageLocators(object):
     
-    CONTACT = (By.LINK_TEXT, "Contact")
     CONTACT_EMAIL = (By.ID, "recipient-email")
     CONTACT_NAME = (By.ID, "recipient-name")
     CONTACT_MESSAGE = (By.ID, "message-text")
     CONTACT_SEND_BUTTON = (By.CSS_SELECTOR, "#exampleModal button.btn.btn-primary")
+
+class SignUpPageLocators(object):
+
+    USERNAME = (By.ID, "sign-username")
+    PASSWORD = (By.ID, "sign-password")
+    SIGN_UP_BUTTON = (By.CSS_SELECTOR, "#signInModal button.btn.btn-primary")
+
+class LogInPageLocators(object):
+
+    USERNAME = (By.ID, "loginusername")
+    PASSWORD = (By.ID, "loginpassword")
+    LOGIN_BUTTON = (By.CSS_SELECTOR, "#logInModal button.btn.btn-primary")    

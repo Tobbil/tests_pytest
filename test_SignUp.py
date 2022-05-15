@@ -10,31 +10,30 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
 
-class TestSendMessage(WebDriverSetup):
+class TestSignUp(WebDriverSetup):
 
-    test_data = {"email":"tester@gmail.com","name":"Mr Tester","message":"Hello!"}
+    test_data = {"username":"MrTester","password":"test0TEST."}
 
-    def test_send_message(self):
+    def test_sign_up(self):
 
         driver = self.driver
         test_data = self.test_data
         main_page = page.MainPage(driver)
-        contact_page = page.ContactPage(driver)
+        signup_page = page.SignUpPage(driver)
         driver.implicitly_wait(10)
         driver.get("https://www.demoblaze.com/")
-        main_page.click_contact_link()
-        element = contact_page.get_contact_email_field()
-        element.send_keys(test_data["email"])
-        element = contact_page.get_contact_name_field()
-        element.send_keys(test_data["name"])
-        element = contact_page.get_contact_message_field()
-        element.send_keys(test_data["message"])
+        main_page.click_signup_link()
+        element = signup_page.get_username_field()
+        element.send_keys(test_data["username"])
+        element = signup_page.get_password_field()
+        element.send_keys(test_data["password"])
         time.sleep(1)
-        contact_page.click_send_button()
+        signup_page.click_signup_button()
         WebDriverWait(driver,10).until(EC.alert_is_present())
         alert = driver.switch_to.alert
-        time.sleep(1)
+        print(f"Alert message: {alert.text}")
         alert.accept()
+        time.sleep(3)
 
 if __name__ == "__main__":
     unittest.main()
