@@ -2,16 +2,15 @@ import sys
 import time
 import unittest
 import os
-import page 
 from WebDriverSetup import WebDriverSetup
+from PageObject import page
 from webbrowser import Chrome
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
 
-
-class TestDemoblazeAddToCart(WebDriverSetup):
+class TestAddToCart(WebDriverSetup):
 
     test_data = {"name":"Mr Test","country":"Norway","city":"Tromsø",
                 "card":"4376232127005830","month":"May","year":"2022"}
