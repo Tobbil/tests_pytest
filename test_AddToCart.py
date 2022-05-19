@@ -74,10 +74,11 @@ class TestAddToCart(WebDriverSetup):
         time.sleep(1)
         element = checkout_page.get_submit_purchase()
         element.click()
-        # tu assert danych w alercie
+        # tu assert danych w oknie potwierdzenia
         
-        # tu assert danych w alercie
+        # tu assert danych w oknie potwierdzenia
         element = checkout_page.get_OK_button_purchase()
+        time.sleep(3)
         element.click()
 
 if __name__ == "__main__":

@@ -25,10 +25,13 @@ class TestSendMessage(WebDriverSetup):
         main_page.click_contact_link()
         element = contact_page.get_contact_email_field()
         element.send_keys(test_data["email"])
+        self.assertEqual(test_data["email"],element.get_attribute("value")) # VERIFY IF INPUT IS CORRECT
         element = contact_page.get_contact_name_field()
         element.send_keys(test_data["name"])
+        self.assertEqual(test_data["name"],element.get_attribute("value"))
         element = contact_page.get_contact_message_field()
         element.send_keys(test_data["message"])
+        self.assertEqual(test_data["message"],element.get_attribute("value"))
         time.sleep(1)
         contact_page.click_send_button()
         WebDriverWait(driver,10).until(EC.alert_is_present())

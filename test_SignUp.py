@@ -25,8 +25,10 @@ class TestSignUp(WebDriverSetup):
         main_page.click_signup_link()
         element = signup_page.get_username_field()
         element.send_keys(test_data["username"])
+        self.assertEqual(test_data["username"],element.get_attribute("value")) # VERIFY IF INPUT IS CORRECT
         element = signup_page.get_password_field()
         element.send_keys(test_data["password"])
+        self.assertEqual(test_data["password"],element.get_attribute("value"))
         time.sleep(1)
         signup_page.click_signup_button()
         WebDriverWait(driver,10).until(EC.alert_is_present())
