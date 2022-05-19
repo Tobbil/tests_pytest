@@ -9,7 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import UnexpectedAlertPresentException
+from selenium.common.exceptions import UnexpectedAlertPresentException, TimeoutException
 
 class TestAddToCart(WebDriverSetup):
 
@@ -66,6 +66,7 @@ class TestAddToCart(WebDriverSetup):
         price_checkout_trimmed = element.text.replace("Total: ","")
         self.assertEqual(price_checkout_trimmed,"360")
         checkout_elements = checkout_page.get_checkout_form()
+        time.sleep(0.5)
         checkout_elements[0].send_keys(test_data["name"])
         time.sleep(0.5)
         checkout_elements[1].send_keys(test_data["country"])
@@ -80,7 +81,6 @@ class TestAddToCart(WebDriverSetup):
         time.sleep(1)
         element = checkout_page.get_submit_purchase()
         element.click()
-        WebDriverWait(driver,3).until(EC.alert_is_present())
         # tu assert danych w oknie potwierdzenia
         
         # tu assert danych w oknie potwierdzenia

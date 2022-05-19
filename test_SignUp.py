@@ -17,6 +17,7 @@ class TestSignUp(WebDriverSetup):
     def test_sign_up(self):
 
         driver = self.driver
+        driver.implicitly_wait(10)
         test_data = self.test_data
         main_page = page.MainPage(driver)
         signup_page = page.SignUpPage(driver)
