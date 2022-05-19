@@ -42,6 +42,7 @@ class MainPage(BasePage):
         self.CONTACT = MainPageLocators.CONTACT
         self.SIGN_UP = MainPageLocators.SIGN_UP
         self.LOG_IN = MainPageLocators.LOG_IN
+        self.LOG_OUT = MainPageLocators.LOG_OUT
         self.USERNAME_IN_MENU = MainPageLocators.USERNAME_IN_MENU
 
     def click_menu_phones(self):
@@ -62,6 +63,11 @@ class MainPage(BasePage):
     def click_login_link(self):
 
         element = self.handle_exceptions(self.LOG_IN)
+        element.click()
+
+    def click_logout_link(self):
+
+        element = self.handle_exceptions(self.LOG_OUT)
         element.click()
 
     def get_username_in_menu(self):

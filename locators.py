@@ -14,6 +14,7 @@ class MainPageLocators(object):
     CONTACT = (By.LINK_TEXT, "Contact")
     SIGN_UP = (By.ID, "signin2")
     LOG_IN = (By.ID, "login2")
+    LOG_OUT = (By.ID, "logout2")
     USERNAME_IN_MENU = (By.ID, "nameofuser")
 
 class CartPageLocators(object):
@@ -53,4 +54,4 @@ class LogInPageLocators(object):
 
     USERNAME = (By.ID, "loginusername")
     PASSWORD = (By.ID, "loginpassword")
-    LOGIN_BUTTON = (By.CSS_SELECTOR, "#logInModal button.btn.btn-primary")    
+    LOGIN_BUTTON = (By.CSS_SELECTOR, "#logInModal button.btn.btn-primary")   

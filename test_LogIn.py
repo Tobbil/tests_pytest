@@ -34,6 +34,10 @@ class TestLogIn(WebDriverSetup):
         WebDriverWait(driver,10).until(EC.text_to_be_present_in_element(page.MainPageLocators.USERNAME_IN_MENU,"Welcome"))
         element = main_page.get_username_in_menu()
         self.assertEqual(element.text,f"Welcome {test_data['username']}")
+        element = main_page.click_logout_link()
+        WebDriverWait(driver,10).until(EC.text_to_be_present_in_element(page.MainPageLocators.LOG_IN,"Log in"))
+        element = self.driver.find_element(*page.MainPageLocators.LOG_IN)
+        self.assertEqual(element.text,"Log in")
         time.sleep(1)
 
 if __name__ == "__main__":
