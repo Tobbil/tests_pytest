@@ -186,16 +186,21 @@ class CheckoutPage(BasePage):
 
         return element
 
-    def get_checkout_form(self):
+    def fill_checkout_form(self, test_data):
         
         checkout_name = self.handle_exceptions(self.CHECKOUT_FORM_NAME)
+        checkout_name.send_keys(test_data["name"])
         checkout_country = self.handle_exceptions(self.CHECKOUT_FORM_COUNTRY)
+        checkout_country.send_keys(test_data["country"])
         checkout_city = self.handle_exceptions(self.CHECKOUT_FORM_CITY)
+        checkout_city.send_keys(test_data["city"])
         checkout_card = self.handle_exceptions(self.CHECKOUT_FORM_CARD)
+        checkout_card.send_keys(test_data["card"])
         checkout_month = self.handle_exceptions(self.CHECKOUT_FORM_MONTH)
+        checkout_month.send_keys(test_data["month"])
         checkout_year = self.handle_exceptions(self.CHECKOUT_FORM_YEAR)
+        checkout_year.send_keys(test_data["year"])
 
-        return checkout_name, checkout_country, checkout_city, checkout_card, checkout_month, checkout_year
         
     def get_submit_purchase(self):
 
