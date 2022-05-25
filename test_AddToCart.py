@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import UnexpectedAlertPresentException, TimeoutException
 
+
 class TestAddToCart(WebDriverSetup):
 
     test_data = {"name":"Mr Test","country":"Norway","city":"Tromsø",
