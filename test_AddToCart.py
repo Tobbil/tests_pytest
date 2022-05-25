@@ -2,6 +2,7 @@ import sys
 import time
 import unittest
 import os
+from datetime import date
 from WebDriverSetup import WebDriverSetup
 from PageObject import page
 from webbrowser import Chrome
@@ -57,9 +58,6 @@ class TestAddToCart(WebDriverSetup):
         self.assertIn(element.text,"$360")
         element = cart_page.get_phone_name_in_table()
         self.assertEqual("Samsung galaxy s6",element.text)
-        # tu test dla delete
-
-        # tu test dla delete
         element = cart_page.get_place_order_button()
         self.assertEqual("Place Order",element.text)
         element.click()
@@ -70,9 +68,18 @@ class TestAddToCart(WebDriverSetup):
         time.sleep(1)
         element = checkout_page.get_submit_purchase()
         element.click()
-        # tu assert danych w oknie potwierdzenia
-        
-        # tu assert danych w oknie potwierdzenia
+        element = checkout_page.get_confirmation().text.split("\n")
+        amount = element[1]
+        card_number = element[2]
+        name = element[3]
+        current_date = element[4]
+        date_today = date.today().strftime('%d/%m/%Y')
+        if date_today[3] == "0":
+            date_today = date_today[:3] + date_today[4:]
+        self.assertEqual("Amount: 360 USD",amount)
+        self.assertEqual(f"Card Number: {test_data['card']}",card_number)
+        self.assertEqual(f"Name: {test_data['name']}",name)
+        # self.assertEqual(f"Date: {date_today}",current_date) # BUG - wrong month.
         element = checkout_page.get_OK_button_purchase()
         time.sleep(3)
         element.click()

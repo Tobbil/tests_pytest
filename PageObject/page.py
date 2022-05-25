@@ -172,6 +172,7 @@ class CheckoutPage(BasePage):
         self.CHECKOUT_FORM_MONTH = CheckoutPageLocators.CHECKOUT_FORM_MONTH
         self.CHECKOUT_FORM_YEAR = CheckoutPageLocators.CHECKOUT_FORM_YEAR
         self.CHECKOUT_SUBMIT_BUTTON = CheckoutPageLocators.CHECKOUT_SUBMIT_BUTTON
+        self.CHECKOUT_CONFIRMATION = CheckoutPageLocators.CHECKOUT_CONFIRMATION
         self.CHECKOUT_OK_BUTTON = CheckoutPageLocators.CHECKOUT_OK_BUTTON
 
     def get_total_in_checkout(self):
@@ -201,7 +202,10 @@ class CheckoutPage(BasePage):
         checkout_year = self.handle_exceptions(self.CHECKOUT_FORM_YEAR)
         checkout_year.send_keys(test_data["year"])
 
-        
+    def get_confirmation(self):
+
+        return self.handle_exceptions(self.CHECKOUT_CONFIRMATION)
+
     def get_submit_purchase(self):
 
         return self.handle_exceptions(self.CHECKOUT_SUBMIT_BUTTON)

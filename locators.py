@@ -35,6 +35,7 @@ class CheckoutPageLocators(object):
     CHECKOUT_FORM_MONTH = (By.CSS_SELECTOR, "#orderModal #month")
     CHECKOUT_FORM_YEAR = (By.CSS_SELECTOR, "#orderModal #year")
     CHECKOUT_SUBMIT_BUTTON = (By.CSS_SELECTOR, "#orderModal button.btn.btn-primary")
+    CHECKOUT_CONFIRMATION = (By.CSS_SELECTOR, "p.lead.text-muted")
     CHECKOUT_OK_BUTTON = (By.CSS_SELECTOR, "button.confirm.btn.btn-lg.btn-primary")
 
 class ContactPageLocators(object):
