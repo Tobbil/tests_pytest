@@ -81,7 +81,7 @@ class TestAddToCart(WebDriverSetup):
         self.assertEqual(f"Name: {test_data['name']}",name)
         # self.assertEqual(f"Date: {date_today}",current_date) # BUG - wrong month.
         element = checkout_page.get_OK_button_purchase()
-        time.sleep(3)
+        time.sleep(1.5)
         element.click()
 
 if __name__ == "__main__":
