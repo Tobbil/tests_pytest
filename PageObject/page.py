@@ -197,29 +197,23 @@ class CheckoutPage(BasePage):
     def fill_checkout_form(self, test_data):
         
         checkout_name = self.handle_exceptions(self.CHECKOUT_FORM_NAME)
-        checkout_name.send_keys(test_data["name"])
+        while checkout_name.get_attribute("value") == "":
+            checkout_name.send_keys(test_data["name"])
         checkout_country = self.handle_exceptions(self.CHECKOUT_FORM_COUNTRY)
-        checkout_country.send_keys(test_data["country"])
+        while checkout_country.get_attribute("value") == "":
+            checkout_country.send_keys(test_data["country"])
         checkout_city = self.handle_exceptions(self.CHECKOUT_FORM_CITY)
-        checkout_city.send_keys(test_data["city"])
+        while checkout_city.get_attribute("value") == "":
+            checkout_city.send_keys(test_data["city"])
         checkout_card = self.handle_exceptions(self.CHECKOUT_FORM_CARD)
-        checkout_card.send_keys(test_data["card"])
+        while checkout_card.get_attribute("value") == "":
+            checkout_card.send_keys(test_data["card"])
         checkout_month = self.handle_exceptions(self.CHECKOUT_FORM_MONTH)
-        checkout_month.send_keys(test_data["month"])
+        while checkout_month.get_attribute("value") == "":
+            checkout_month.send_keys(test_data["month"])
         checkout_year = self.handle_exceptions(self.CHECKOUT_FORM_YEAR)
-        checkout_year.send_keys(test_data["year"])
-
-    def get_confirmation(self):
-
-        return self.handle_exceptions(self.CHECKOUT_CONFIRMATION)
-
-    def get_submit_purchase(self):
-
-        return self.handle_exceptions(self.CHECKOUT_SUBMIT_BUTTON)
-
-    def get_OK_button_purchase(self):
-
-        return self.handle_exceptions(self.CHECKOUT_OK_BUTTON)
+        while checkout_year.get_attribute("value") == "":
+            checkout_year.send_keys(test_data["year"])
 
 class ContactPage(BasePage):
 
@@ -231,22 +225,19 @@ class ContactPage(BasePage):
         self.CONTACT_MESSAGE = ContactPageLocators.CONTACT_MESSAGE
         self.CONTACT_SEND_BUTTON = ContactPageLocators.CONTACT_SEND_BUTTON
 
-    def get_contact_email_field(self):
+    def fill_contact_fields(self, test_data):
 
-        return self.handle_exceptions(self.CONTACT_EMAIL)
-
-    def get_contact_name_field(self):
-
-        return self.handle_exceptions(self.CONTACT_NAME)
+        element = self.get_element(self.CONTACT_EMAIL)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["email"])
         
-    def get_contact_message_field(self):
+        element = self.get_element(self.CONTACT_NAME)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["name"])
 
-        return self.handle_exceptions(self.CONTACT_MESSAGE)
-
-    def click_send_button(self):
-
-        element = self.handle_exceptions(self.CONTACT_SEND_BUTTON)
-        element.click()
+        element = self.get_element(self.CONTACT_MESSAGE)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["message"])
 
 class SignUpPage(BasePage):
 
