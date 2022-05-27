@@ -23,20 +23,15 @@ class TestSignUp(WebDriverSetup):
         signup_page = page.SignUpPage(driver)
         driver.implicitly_wait(10)
         driver.get("https://www.demoblaze.com/")
-        main_page.click_signup_link()
-        element = signup_page.get_username_field()
-        element.send_keys(test_data["username"])
-        self.assertEqual(test_data["username"],element.get_attribute("value")) # VERIFY IF INPUT IS CORRECT
-        element = signup_page.get_password_field()
-        element.send_keys(test_data["password"])
-        self.assertEqual(test_data["password"],element.get_attribute("value"))
+        main_page.click_element(main_page.SIGN_UP)
+        signup_page.fill_username_and_password(test_data)
         time.sleep(1)
-        signup_page.click_signup_button()
+        signup_page.click_element(signup_page.SIGN_UP_BUTTON)
         WebDriverWait(driver,10).until(EC.alert_is_present())
         alert = driver.switch_to.alert
         print(f"Alert message: {alert.text}")
         alert.accept()
-        time.sleep(3)
+        time.sleep(1)
 
 if __name__ == "__main__":
     unittest.main()

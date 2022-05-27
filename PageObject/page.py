@@ -12,8 +12,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 
-
-
 class BasePage:
 
     def handle_exceptions(self, object):
@@ -24,7 +22,16 @@ class BasePage:
         except (StaleElementReferenceException, NoSuchElementException):
             element = WebDriverWait(self.driver,50).until(EC.presence_of_element_located(object))
             
-        return element 
+        return element
+
+    def click_element(self, object):
+
+        element = self.handle_exceptions(object)
+        element.click()
+
+    def get_element(self, object):
+
+        return self.handle_exceptions(object)
 
 class MainPage(BasePage):
 
@@ -250,18 +257,15 @@ class SignUpPage(BasePage):
         self.PASSWORD = SignUpPageLocators.PASSWORD
         self.SIGN_UP_BUTTON = SignUpPageLocators.SIGN_UP_BUTTON
 
-    def get_username_field(self):
+    def fill_username_and_password(self,test_data):
 
-        return self.handle_exceptions(self.USERNAME)
-
-    def get_password_field(self):
-
-        return self.handle_exceptions(self.PASSWORD)
-
-    def click_signup_button(self):
-
-        element = self.handle_exceptions(self.SIGN_UP_BUTTON)
-        element.click()
+        element = self.get_element(self.USERNAME)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["username"])
+        
+        element = self.get_element(self.PASSWORD)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["password"])
 
 class LogInPage(BasePage):
 
@@ -272,16 +276,13 @@ class LogInPage(BasePage):
         self.PASSWORD = LogInPageLocators.PASSWORD
         self.LOGIN_BUTTON = LogInPageLocators.LOGIN_BUTTON
 
-    def get_username_field(self):
+    def fill_username_and_password(self,test_data):
 
-        return self.handle_exceptions(self.USERNAME)
+        element = self.get_element(self.USERNAME)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["username"])
 
-    def get_password_field(self):
-
-        return self.handle_exceptions(self.PASSWORD)
-
-    def click_login_button(self):
-
-        element = self.handle_exceptions(self.LOGIN_BUTTON)
-        element.click()
+        element = self.get_element(self.PASSWORD)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["password"])
 
