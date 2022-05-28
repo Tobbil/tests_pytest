@@ -19,6 +19,7 @@ class TestAddToCart(WebDriverSetup):
                 "card":"4376232127005830","month":"May","year":"2022"}
         
     def test_add_to_cart(self):
+        
         driver = self.driver
         test_data = self.test_data
         driver.implicitly_wait(10)
