@@ -1,9 +1,5 @@
-from lib2to3.pgen2 import driver
-from re import S
-import sys
 import time
 from PageObject.locators import ContactPageLocators, LogInPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators, SignUpPageLocators
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.common.keys import Keys
@@ -50,66 +46,6 @@ class MainPage(BasePage):
         self.LOG_IN = MainPageLocators.LOG_IN
         self.LOG_OUT = MainPageLocators.LOG_OUT
         self.USERNAME_IN_MENU = MainPageLocators.USERNAME_IN_MENU
-
-    def click_menu_phones(self):
-        
-        element = self.handle_exceptions(self.MENU_PHONES)
-        element.click()
-
-    def click_contact_link(self):
-
-        element = self.handle_exceptions(self.CONTACT)
-        element.click()
-
-    def click_signup_link(self):
-
-        element = self.handle_exceptions(self.SIGN_UP)
-        element.click()
-
-    def click_login_link(self):
-
-        element = self.handle_exceptions(self.LOG_IN)
-        element.click()
-
-    def click_logout_link(self):
-
-        element = self.handle_exceptions(self.LOG_OUT)
-        element.click()
-
-    def get_username_in_menu(self):
-
-        return self.handle_exceptions(self.USERNAME_IN_MENU)
-
-    def get_price_in_list(self):
-
-        return self.handle_exceptions(self.PRICE_IN_LIST)
-
-
-    def get_phone_name_in_list(self):
-
-        return self.handle_exceptions(self.PHONE_NAME_IN_LIST)
- 
-
-    def get_price_in_item_page(self):
-
-        return self.handle_exceptions(self.PRICE_IN_ITEM_PAGE)
- 
-
-    def get_phone_name_in_item_page(self):
-        
-        return self.handle_exceptions(self.PHONE_NAME_IN_ITEM_PAGE)
-
-    def get_description_in_item_page(self):
-
-        return self.handle_exceptions(self.DESCRIPTION_IN_ITEM_PAGE)
-
-    def get_add_to_cart_button(self):
-
-        return self.handle_exceptions(self.ADD_TO_CART_BUTTON)
-
-    def get_go_to_cart(self):
-
-        return self.handle_exceptions(self.GO_TO_CART)
 
 class CartPage(BasePage):
 
