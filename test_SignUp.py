@@ -17,11 +17,9 @@ class TestSignUp(WebDriverSetup):
     def test_sign_up(self):
 
         driver = self.driver
-        driver.implicitly_wait(10)
         test_data = self.test_data
         main_page = page.MainPage(driver)
         signup_page = page.SignUpPage(driver)
-        driver.implicitly_wait(10)
         driver.get("https://www.demoblaze.com/")
         main_page.click_element(main_page.SIGN_UP)
         signup_page.fill_username_and_password(test_data)

@@ -2,7 +2,6 @@ from lib2to3.pgen2 import driver
 from re import S
 import sys
 import time
-from element import BasePageElement
 from locators import ContactPageLocators, LogInPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators, SignUpPageLocators
 from selenium import webdriver
 from selenium.webdriver.common.by import By

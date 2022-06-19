@@ -22,7 +22,6 @@ class TestAddToCart(WebDriverSetup):
         
         driver = self.driver
         test_data = self.test_data
-        driver.implicitly_wait(10)
         driver.get("https://www.demoblaze.com/")
         main_page = page.MainPage(driver)
         cart_page = page.CartPage(driver)

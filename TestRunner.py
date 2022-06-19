@@ -1,8 +1,4 @@
-import sys
-import os
-# sys.path.append(sys.path[0] + "/...")
-# sys.path.append(os.getcwd())
- 
+
 from unittest import TestLoader, TestSuite, TextTestRunner
 from test_AddToCart import TestAddToCart
 from test_SendMessage import TestSendMessage
@@ -14,7 +10,6 @@ import testtools as testtools
 if __name__ == "__main__":
  
     test_loader = TestLoader()
-    # Test Suite is used since there are multiple test cases
     test_suite = TestSuite((
         test_loader.loadTestsFromTestCase(TestAddToCart),
         test_loader.loadTestsFromTestCase(TestSendMessage),

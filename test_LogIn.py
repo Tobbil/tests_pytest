@@ -20,7 +20,6 @@ class TestLogIn(WebDriverSetup):
         test_data = self.test_data
         main_page = page.MainPage(driver)
         login_page = page.LogInPage(driver)
-        driver.implicitly_wait(10)
         driver.get("https://www.demoblaze.com/")
         main_page.click_element(main_page.LOG_IN)
         login_page.fill_username_and_password(test_data)

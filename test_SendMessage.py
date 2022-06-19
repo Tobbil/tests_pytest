@@ -20,7 +20,6 @@ class TestSendMessage(WebDriverSetup):
         test_data = self.test_data
         main_page = page.MainPage(driver)
         contact_page = page.ContactPage(driver)
-        driver.implicitly_wait(10)
         driver.get("https://www.demoblaze.com/")
         main_page.click_element(main_page.CONTACT)
         contact_page.fill_contact_fields(test_data)
