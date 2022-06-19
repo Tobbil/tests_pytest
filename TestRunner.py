@@ -4,8 +4,6 @@ from test_AddToCart import TestAddToCart
 from test_SendMessage import TestSendMessage
 from test_SignUp import TestSignUp
 from test_LogIn import TestLogIn
-
-import testtools as testtools
  
 if __name__ == "__main__":
  
@@ -19,8 +17,3 @@ if __name__ == "__main__":
  
     test_runner = TextTestRunner(verbosity=2)
     test_runner.run(test_suite)
- 
-    # Refer https://testtools.readthedocs.io/en/latest/api.html for more information
-    # parallel_suite = testtools.ConcurrentStreamTestSuite(lambda: ((case, None) for case in test_suite))
-    # parallel_suite.run(testtools.StreamResult())
-    #     self.driver.set_page_load_timeout(30))
