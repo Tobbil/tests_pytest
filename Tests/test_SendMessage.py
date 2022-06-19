@@ -4,8 +4,6 @@ import os
 import sys
 from PageObject import page
 from WebDriverSetup import WebDriverSetup
-from webbrowser import Chrome
-from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
@@ -20,22 +18,14 @@ class TestSendMessage(WebDriverSetup):
         test_data = self.test_data
         main_page = page.MainPage(driver)
         contact_page = page.ContactPage(driver)
-        driver.implicitly_wait(10)
         driver.get("https://www.demoblaze.com/")
-        main_page.click_contact_link()
-        element = contact_page.get_contact_email_field()
-        element.send_keys(test_data["email"])
-        self.assertEqual(test_data["email"],element.get_attribute("value")) # VERIFY IF INPUT IS CORRECT
-        element = contact_page.get_contact_name_field()
-        element.send_keys(test_data["name"])
-        self.assertEqual(test_data["name"],element.get_attribute("value"))
-        element = contact_page.get_contact_message_field()
-        element.send_keys(test_data["message"])
-        self.assertEqual(test_data["message"],element.get_attribute("value"))
+        main_page.click_element(main_page.CONTACT)
+        contact_page.fill_contact_fields(test_data)
         time.sleep(1)
-        contact_page.click_send_button()
+        contact_page.click_element(contact_page.CONTACT_SEND_BUTTON)
         WebDriverWait(driver,10).until(EC.alert_is_present())
         alert = driver.switch_to.alert
+        self.assertEqual("Thanks for the message!!",alert.text)
         time.sleep(1)
         alert.accept()
 

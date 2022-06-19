@@ -1,18 +1,11 @@
-from lib2to3.pgen2 import driver
-from re import S
-import sys
 import time
-from element import BasePageElement
-from locators import ContactPageLocators, LogInPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators, SignUpPageLocators
-from selenium import webdriver
+from PageObject.locators import ContactPageLocators, LogInPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators, SignUpPageLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
-
-
 
 class BasePage:
 
@@ -24,7 +17,16 @@ class BasePage:
         except (StaleElementReferenceException, NoSuchElementException):
             element = WebDriverWait(self.driver,50).until(EC.presence_of_element_located(object))
             
-        return element 
+        return element
+
+    def click_element(self, object):
+
+        element = self.handle_exceptions(object)
+        element.click()
+
+    def get_element(self, object):
+
+        return self.handle_exceptions(object)
 
 class MainPage(BasePage):
 
@@ -44,66 +46,6 @@ class MainPage(BasePage):
         self.LOG_IN = MainPageLocators.LOG_IN
         self.LOG_OUT = MainPageLocators.LOG_OUT
         self.USERNAME_IN_MENU = MainPageLocators.USERNAME_IN_MENU
-
-    def click_menu_phones(self):
-        
-        element = self.handle_exceptions(self.MENU_PHONES)
-        element.click()
-
-    def click_contact_link(self):
-
-        element = self.handle_exceptions(self.CONTACT)
-        element.click()
-
-    def click_signup_link(self):
-
-        element = self.handle_exceptions(self.SIGN_UP)
-        element.click()
-
-    def click_login_link(self):
-
-        element = self.handle_exceptions(self.LOG_IN)
-        element.click()
-
-    def click_logout_link(self):
-
-        element = self.handle_exceptions(self.LOG_OUT)
-        element.click()
-
-    def get_username_in_menu(self):
-
-        return self.handle_exceptions(self.USERNAME_IN_MENU)
-
-    def get_price_in_list(self):
-
-        return self.handle_exceptions(self.PRICE_IN_LIST)
-
-
-    def get_phone_name_in_list(self):
-
-        return self.handle_exceptions(self.PHONE_NAME_IN_LIST)
- 
-
-    def get_price_in_item_page(self):
-
-        return self.handle_exceptions(self.PRICE_IN_ITEM_PAGE)
- 
-
-    def get_phone_name_in_item_page(self):
-        
-        return self.handle_exceptions(self.PHONE_NAME_IN_ITEM_PAGE)
-
-    def get_description_in_item_page(self):
-
-        return self.handle_exceptions(self.DESCRIPTION_IN_ITEM_PAGE)
-
-    def get_add_to_cart_button(self):
-
-        return self.handle_exceptions(self.ADD_TO_CART_BUTTON)
-
-    def get_go_to_cart(self):
-
-        return self.handle_exceptions(self.GO_TO_CART)
 
 class CartPage(BasePage):
 
@@ -172,6 +114,7 @@ class CheckoutPage(BasePage):
         self.CHECKOUT_FORM_MONTH = CheckoutPageLocators.CHECKOUT_FORM_MONTH
         self.CHECKOUT_FORM_YEAR = CheckoutPageLocators.CHECKOUT_FORM_YEAR
         self.CHECKOUT_SUBMIT_BUTTON = CheckoutPageLocators.CHECKOUT_SUBMIT_BUTTON
+        self.CHECKOUT_CONFIRMATION = CheckoutPageLocators.CHECKOUT_CONFIRMATION
         self.CHECKOUT_OK_BUTTON = CheckoutPageLocators.CHECKOUT_OK_BUTTON
 
     def get_total_in_checkout(self):
@@ -186,24 +129,26 @@ class CheckoutPage(BasePage):
 
         return element
 
-    def get_checkout_form(self):
+    def fill_checkout_form(self, test_data):
         
         checkout_name = self.handle_exceptions(self.CHECKOUT_FORM_NAME)
+        while checkout_name.get_attribute("value") == "":
+            checkout_name.send_keys(test_data["name"])
         checkout_country = self.handle_exceptions(self.CHECKOUT_FORM_COUNTRY)
+        while checkout_country.get_attribute("value") == "":
+            checkout_country.send_keys(test_data["country"])
         checkout_city = self.handle_exceptions(self.CHECKOUT_FORM_CITY)
+        while checkout_city.get_attribute("value") == "":
+            checkout_city.send_keys(test_data["city"])
         checkout_card = self.handle_exceptions(self.CHECKOUT_FORM_CARD)
+        while checkout_card.get_attribute("value") == "":
+            checkout_card.send_keys(test_data["card"])
         checkout_month = self.handle_exceptions(self.CHECKOUT_FORM_MONTH)
+        while checkout_month.get_attribute("value") == "":
+            checkout_month.send_keys(test_data["month"])
         checkout_year = self.handle_exceptions(self.CHECKOUT_FORM_YEAR)
-
-        return checkout_name, checkout_country, checkout_city, checkout_card, checkout_month, checkout_year
-        
-    def get_submit_purchase(self):
-
-        return self.handle_exceptions(self.CHECKOUT_SUBMIT_BUTTON)
-
-    def get_OK_button_purchase(self):
-
-        return self.handle_exceptions(self.CHECKOUT_OK_BUTTON)
+        while checkout_year.get_attribute("value") == "":
+            checkout_year.send_keys(test_data["year"])
 
 class ContactPage(BasePage):
 
@@ -215,22 +160,19 @@ class ContactPage(BasePage):
         self.CONTACT_MESSAGE = ContactPageLocators.CONTACT_MESSAGE
         self.CONTACT_SEND_BUTTON = ContactPageLocators.CONTACT_SEND_BUTTON
 
-    def get_contact_email_field(self):
+    def fill_contact_fields(self, test_data):
 
-        return self.handle_exceptions(self.CONTACT_EMAIL)
-
-    def get_contact_name_field(self):
-
-        return self.handle_exceptions(self.CONTACT_NAME)
+        element = self.get_element(self.CONTACT_EMAIL)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["email"])
         
-    def get_contact_message_field(self):
+        element = self.get_element(self.CONTACT_NAME)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["name"])
 
-        return self.handle_exceptions(self.CONTACT_MESSAGE)
-
-    def click_send_button(self):
-
-        element = self.handle_exceptions(self.CONTACT_SEND_BUTTON)
-        element.click()
+        element = self.get_element(self.CONTACT_MESSAGE)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["message"])
 
 class SignUpPage(BasePage):
 
@@ -241,18 +183,15 @@ class SignUpPage(BasePage):
         self.PASSWORD = SignUpPageLocators.PASSWORD
         self.SIGN_UP_BUTTON = SignUpPageLocators.SIGN_UP_BUTTON
 
-    def get_username_field(self):
+    def fill_username_and_password(self,test_data):
 
-        return self.handle_exceptions(self.USERNAME)
-
-    def get_password_field(self):
-
-        return self.handle_exceptions(self.PASSWORD)
-
-    def click_signup_button(self):
-
-        element = self.handle_exceptions(self.SIGN_UP_BUTTON)
-        element.click()
+        element = self.get_element(self.USERNAME)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["username"])
+        
+        element = self.get_element(self.PASSWORD)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["password"])
 
 class LogInPage(BasePage):
 
@@ -263,16 +202,13 @@ class LogInPage(BasePage):
         self.PASSWORD = LogInPageLocators.PASSWORD
         self.LOGIN_BUTTON = LogInPageLocators.LOGIN_BUTTON
 
-    def get_username_field(self):
+    def fill_username_and_password(self,test_data):
 
-        return self.handle_exceptions(self.USERNAME)
+        element = self.get_element(self.USERNAME)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["username"])
 
-    def get_password_field(self):
-
-        return self.handle_exceptions(self.PASSWORD)
-
-    def click_login_button(self):
-
-        element = self.handle_exceptions(self.LOGIN_BUTTON)
-        element.click()
+        element = self.get_element(self.PASSWORD)
+        while element.get_attribute("value") == "":
+            element.send_keys(test_data["password"])
 
