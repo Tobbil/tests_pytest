@@ -2,7 +2,7 @@ from lib2to3.pgen2 import driver
 from re import S
 import sys
 import time
-from locators import ContactPageLocators, LogInPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators, SignUpPageLocators
+from PageObject.locators import ContactPageLocators, LogInPageLocators, MainPageLocators, CartPageLocators, CheckoutPageLocators, SignUpPageLocators
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 

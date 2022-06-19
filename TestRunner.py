@@ -1,9 +1,9 @@
 
 from unittest import TestLoader, TestSuite, TextTestRunner
-from test_AddToCart import TestAddToCart
-from test_SendMessage import TestSendMessage
-from test_SignUp import TestSignUp
-from test_LogIn import TestLogIn
+from Tests.test_AddToCart import TestAddToCart
+from Tests.test_SendMessage import TestSendMessage
+from Tests.test_SignUp import TestSignUp
+from Tests.test_LogIn import TestLogIn
  
 if __name__ == "__main__":
  
