@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-###
+
 class MainPageLocators:
 
     MENU_PHONES = (By.LINK_TEXT, "Phones")
