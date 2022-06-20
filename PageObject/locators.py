@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
-class MainPageLocators(object):
-    """A class for main page locators. All main page locators should come here"""
+class MainPageLocators:
 
     MENU_PHONES = (By.LINK_TEXT, "Phones")
     PRICE_IN_LIST = (By.CSS_SELECTOR, "#tbodyid h5")
@@ -17,7 +16,7 @@ class MainPageLocators(object):
     LOG_OUT = (By.ID, "logout2")
     USERNAME_IN_MENU = (By.ID, "nameofuser")
 
-class CartPageLocators(object):
+class CartPageLocators:
 
     CART = (By.CLASS_NAME, "table-responsive")
     CART_CHILDREN = (By.ID, "tbodyid")
@@ -25,7 +24,7 @@ class CartPageLocators(object):
     TABLE = (By.CLASS_NAME, "success") 
     PLACE_ORDER_BUTTON = (By.CLASS_NAME, "btn.btn-success")
 
-class CheckoutPageLocators(object):
+class CheckoutPageLocators:
 
     CHECKOUT_TOTAL = (By.CSS_SELECTOR, "#orderModal #totalm")
     CHECKOUT_FORM_NAME = (By.CSS_SELECTOR, "#orderModal #name")
@@ -38,20 +37,20 @@ class CheckoutPageLocators(object):
     CHECKOUT_CONFIRMATION = (By.CSS_SELECTOR, "p.lead.text-muted")
     CHECKOUT_OK_BUTTON = (By.CSS_SELECTOR, "button.confirm.btn.btn-lg.btn-primary")
 
-class ContactPageLocators(object):
+class ContactPageLocators:
     
     CONTACT_EMAIL = (By.ID, "recipient-email")
     CONTACT_NAME = (By.ID, "recipient-name")
     CONTACT_MESSAGE = (By.ID, "message-text")
     CONTACT_SEND_BUTTON = (By.CSS_SELECTOR, "#exampleModal button.btn.btn-primary")
 
-class SignUpPageLocators(object):
+class SignUpPageLocators:
 
     USERNAME = (By.ID, "sign-username")
     PASSWORD = (By.ID, "sign-password")
     SIGN_UP_BUTTON = (By.CSS_SELECTOR, "#signInModal button.btn.btn-primary")
 
-class LogInPageLocators(object):
+class LogInPageLocators:
 
     USERNAME = (By.ID, "loginusername")
     PASSWORD = (By.ID, "loginpassword")
