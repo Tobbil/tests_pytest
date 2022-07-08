@@ -18,13 +18,13 @@ class ContactPage(BasePage):
         timeout = time.time() + 10
 
         element = self.get_element(self.CONTACT_EMAIL)
-        while element.get_attribute("value") == "" and time.time() < 10:
+        while element.get_attribute("value") == "" and time.time() < timeout:
             element.send_keys(test_data["email"])
         
         element = self.get_element(self.CONTACT_NAME)
-        while element.get_attribute("value") == "" and time.time() < 10:
+        while element.get_attribute("value") == "" and time.time() < timeout:
             element.send_keys(test_data["name"])
 
         element = self.get_element(self.CONTACT_MESSAGE)
-        while element.get_attribute("value") == "" and time.time() < 10:
+        while element.get_attribute("value") == "" and time.time() < timeout:
             element.send_keys(test_data["message"])

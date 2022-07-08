@@ -3,6 +3,7 @@ import unittest
 import os
 import sys
 from PageObject import BasePage
+from PageObject import MainPage, CartPage, LogInPage, SignUpPage, ContactPage, CheckoutPage
 from WebDriverSetup import WebDriverSetup
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
@@ -16,8 +17,8 @@ class TestSignUp(WebDriverSetup):
 
         driver = self.driver
         test_data = self.test_data
-        main_page = BasePage.MainPage(driver)
-        signup_page = BasePage.SignUpPage(driver)
+        main_page = MainPage.MainPage(driver)
+        signup_page = SignUpPage.SignUpPage(driver)
         driver.get("https://www.demoblaze.com/")
         main_page.click_element(main_page.SIGN_UP)
         signup_page.fill_username_and_password(test_data)
