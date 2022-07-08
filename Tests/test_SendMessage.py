@@ -2,7 +2,7 @@ import time
 import unittest
 import os
 import sys
-from PageObject import page
+from PageObject import BasePage
 from WebDriverSetup import WebDriverSetup
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
@@ -16,8 +16,8 @@ class TestSendMessage(WebDriverSetup):
 
         driver = self.driver
         test_data = self.test_data
-        main_page = page.MainPage(driver)
-        contact_page = page.ContactPage(driver)
+        main_page = BasePage.MainPage(driver)
+        contact_page = BasePage.ContactPage(driver)
         driver.get("https://www.demoblaze.com/")
         main_page.click_element(main_page.CONTACT)
         contact_page.fill_contact_fields(test_data)

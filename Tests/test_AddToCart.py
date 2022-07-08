@@ -4,7 +4,8 @@ import unittest
 import os
 from datetime import date
 from WebDriverSetup import WebDriverSetup
-from PageObject import page
+from PageObject import BasePage
+from PageObject import MainPage, CartPage, LogInPage, SignUpPage, ContactPage, CheckoutPage
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
@@ -21,9 +22,9 @@ class TestAddToCart(WebDriverSetup):
         driver = self.driver
         test_data = self.test_data
         driver.get("https://www.demoblaze.com/")
-        main_page = page.MainPage(driver)
-        cart_page = page.CartPage(driver)
-        checkout_page = page.CheckoutPage(driver)
+        main_page = MainPage.MainPage(driver)
+        cart_page = CartPage.CartPage(driver)
+        checkout_page = CheckoutPage.CheckoutPage(driver)
         main_page.click_element(main_page.MENU_PHONES)
         element = main_page.get_element(main_page.PRICE_IN_LIST)
         self.assertEqual("$360",element.text)
