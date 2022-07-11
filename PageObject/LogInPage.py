@@ -2,6 +2,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from PageObject.BasePage import BasePage
+from PageObject import helpers as h
 
 class LogInPage(BasePage):
 
@@ -14,12 +15,7 @@ class LogInPage(BasePage):
 
     def fill_username_and_password(self,test_data):
 
-        timeout = time.time() + 10
+        h.send_keys_to_elem(self.driver,self.USERNAME,test_data["username"])
+        h.send_keys_to_elem(self.driver,self.PASSWORD,test_data["password"])
 
-        element = self.get_element(self.USERNAME)
-        while element.get_attribute("value") == "" and time.time() < timeout:
-            element.send_keys(test_data["username"])
-
-        element = self.get_element(self.PASSWORD)
-        while element.get_attribute("value") == "" and time.time() < timeout:
-            element.send_keys(test_data["password"])
+        

@@ -8,6 +8,7 @@ from WebDriverSetup import WebDriverSetup
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
+from PageObject import helpers as h
 
 class TestSignUp(WebDriverSetup):
 
@@ -20,10 +21,10 @@ class TestSignUp(WebDriverSetup):
         main_page = MainPage.MainPage(driver)
         signup_page = SignUpPage.SignUpPage(driver)
         driver.get("https://www.demoblaze.com/")
-        main_page.click_element(main_page.SIGN_UP)
+        h.click_element(driver, main_page.SIGN_UP)
         signup_page.fill_username_and_password(test_data)
         time.sleep(1)
-        signup_page.click_element(signup_page.SIGN_UP_BUTTON)
+        h.click_element(driver, signup_page.SIGN_UP_BUTTON)
         WebDriverWait(driver,10).until(EC.alert_is_present())
         alert = driver.switch_to.alert
         print(f"Alert message: {alert.text}")

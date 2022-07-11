@@ -8,6 +8,7 @@ from WebDriverSetup import WebDriverSetup
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
+from PageObject import helpers as h
 
 class TestLogIn(WebDriverSetup):
 
@@ -20,16 +21,16 @@ class TestLogIn(WebDriverSetup):
         main_page = MainPage.MainPage(driver)
         login_page = LogInPage.LogInPage(driver)
         driver.get("https://www.demoblaze.com/")
-        main_page.click_element(main_page.LOG_IN)
+        h.click_element(driver, main_page.LOG_IN)
         login_page.fill_username_and_password(test_data)
         time.sleep(1)
-        login_page.click_element(login_page.LOGIN_BUTTON)
+        h.click_element(driver, login_page.LOGIN_BUTTON)
         WebDriverWait(driver,10).until(EC.text_to_be_present_in_element(main_page.USERNAME_IN_MENU,"Welcome"))
-        element = main_page.get_element(main_page.USERNAME_IN_MENU)
+        element = h.get_element(driver, main_page.USERNAME_IN_MENU)
         self.assertEqual(element.text,f"Welcome {test_data['username']}")
-        main_page.click_element(main_page.LOG_OUT)
+        h.click_element(driver, main_page.LOG_OUT)
         WebDriverWait(driver,10).until(EC.text_to_be_present_in_element(main_page.LOG_IN,"Log in"))
-        element = self.driver.find_element(*main_page.LOG_IN)
+        element = h.get_element(driver, main_page.LOG_IN)
         self.assertEqual(element.text,"Log in")
         time.sleep(1)
 

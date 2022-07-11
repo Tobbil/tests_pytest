@@ -2,6 +2,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from PageObject.BasePage import BasePage
+from PageObject import helpers as h
 
 class CheckoutPage(BasePage):
 
@@ -25,31 +26,38 @@ class CheckoutPage(BasePage):
 
         while time.time() < timeout:
 
-            element = self.handle_exceptions(self.CHECKOUT_TOTAL)
+            element = h.get_element(self.driver, self.CHECKOUT_TOTAL)
             if len(element.text) > 0:
                 break
+        
+        price_checkout_trimmed = element.text.replace("Total: ","")
 
-        return element
+        return price_checkout_trimmed
 
     def fill_checkout_form(self, test_data):
         
-        timeout = time.time() + 10
+        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_NAME,test_data["name"])
+        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_COUNTRY,test_data["country"])
+        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_CITY,test_data["city"])
+        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_CARD,test_data["card"])
+        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_MONTH,test_data["month"])
+        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_YEAR,test_data["year"])
 
-        checkout_name = self.handle_exceptions(self.CHECKOUT_FORM_NAME)
-        while checkout_name.get_attribute("value") == "" and time.time() < timeout:
-            checkout_name.send_keys(test_data["name"])
-        checkout_country = self.handle_exceptions(self.CHECKOUT_FORM_COUNTRY)
-        while checkout_country.get_attribute("value") == "" and time.time() < timeout:
-            checkout_country.send_keys(test_data["country"])
-        checkout_city = self.handle_exceptions(self.CHECKOUT_FORM_CITY)
-        while checkout_city.get_attribute("value") == "" and time.time() < timeout:
-            checkout_city.send_keys(test_data["city"])
-        checkout_card = self.handle_exceptions(self.CHECKOUT_FORM_CARD)
-        while checkout_card.get_attribute("value") == "" and time.time() < timeout:
-            checkout_card.send_keys(test_data["card"])
-        checkout_month = self.handle_exceptions(self.CHECKOUT_FORM_MONTH)
-        while checkout_month.get_attribute("value") == "" and time.time() < timeout:
-            checkout_month.send_keys(test_data["month"])
-        checkout_year = self.handle_exceptions(self.CHECKOUT_FORM_YEAR)
-        while checkout_year.get_attribute("value") == "" and time.time() < timeout:
-            checkout_year.send_keys(test_data["year"])
+        # checkout_name = self.handle_exceptions(self.CHECKOUT_FORM_NAME)
+        # while checkout_name.get_attribute("value") == "" and time.time() < timeout:
+        #     checkout_name.send_keys(test_data["name"])
+        # checkout_country = self.handle_exceptions(self.CHECKOUT_FORM_COUNTRY)
+        # while checkout_country.get_attribute("value") == "" and time.time() < timeout:
+        #     checkout_country.send_keys(test_data["country"])
+        # checkout_city = self.handle_exceptions(self.CHECKOUT_FORM_CITY)
+        # while checkout_city.get_attribute("value") == "" and time.time() < timeout:
+        #     checkout_city.send_keys(test_data["city"])
+        # checkout_card = self.handle_exceptions(self.CHECKOUT_FORM_CARD)
+        # while checkout_card.get_attribute("value") == "" and time.time() < timeout:
+        #     checkout_card.send_keys(test_data["card"])
+        # checkout_month = self.handle_exceptions(self.CHECKOUT_FORM_MONTH)
+        # while checkout_month.get_attribute("value") == "" and time.time() < timeout:
+        #     checkout_month.send_keys(test_data["month"])
+        # checkout_year = self.handle_exceptions(self.CHECKOUT_FORM_YEAR)
+        # while checkout_year.get_attribute("value") == "" and time.time() < timeout:
+        #     checkout_year.send_keys(test_data["year"])

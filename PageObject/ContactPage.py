@@ -2,6 +2,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from PageObject.BasePage import BasePage
+from PageObject import helpers as h
 
 class ContactPage(BasePage):
 
@@ -15,16 +16,8 @@ class ContactPage(BasePage):
 
     def fill_contact_fields(self, test_data):
 
-        timeout = time.time() + 10
+        # timeout = time.time() + 10
 
-        element = self.get_element(self.CONTACT_EMAIL)
-        while element.get_attribute("value") == "" and time.time() < timeout:
-            element.send_keys(test_data["email"])
-        
-        element = self.get_element(self.CONTACT_NAME)
-        while element.get_attribute("value") == "" and time.time() < timeout:
-            element.send_keys(test_data["name"])
-
-        element = self.get_element(self.CONTACT_MESSAGE)
-        while element.get_attribute("value") == "" and time.time() < timeout:
-            element.send_keys(test_data["message"])
+        h.send_keys_to_elem(self.driver,self.CONTACT_EMAIL,test_data["email"])
+        h.send_keys_to_elem(self.driver,self.CONTACT_NAME,test_data["name"])
+        h.send_keys_to_elem(self.driver,self.CONTACT_MESSAGE,test_data["message"])
