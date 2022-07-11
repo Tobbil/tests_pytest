@@ -15,9 +15,9 @@ def handle_exceptions(driver, object):
             
         return element
 
-def send_keys_to_elem(driver, element, test_data):
+def send_keys_to_elem(driver, object, test_data):
 
-    element = handle_exceptions(driver, element)
+    element = handle_exceptions(driver, object)
     timeout = time.time() + 10
 
     while element.get_attribute("value") == "" and time.time() < timeout:

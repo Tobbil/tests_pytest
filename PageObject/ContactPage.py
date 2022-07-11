@@ -16,8 +16,6 @@ class ContactPage(BasePage):
 
     def fill_contact_fields(self, test_data):
 
-        # timeout = time.time() + 10
-
         h.send_keys_to_elem(self.driver,self.CONTACT_EMAIL,test_data["email"])
         h.send_keys_to_elem(self.driver,self.CONTACT_NAME,test_data["name"])
         h.send_keys_to_elem(self.driver,self.CONTACT_MESSAGE,test_data["message"])

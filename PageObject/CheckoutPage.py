@@ -42,22 +42,3 @@ class CheckoutPage(BasePage):
         h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_CARD,test_data["card"])
         h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_MONTH,test_data["month"])
         h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_YEAR,test_data["year"])
-
-        # checkout_name = self.handle_exceptions(self.CHECKOUT_FORM_NAME)
-        # while checkout_name.get_attribute("value") == "" and time.time() < timeout:
-        #     checkout_name.send_keys(test_data["name"])
-        # checkout_country = self.handle_exceptions(self.CHECKOUT_FORM_COUNTRY)
-        # while checkout_country.get_attribute("value") == "" and time.time() < timeout:
-        #     checkout_country.send_keys(test_data["country"])
-        # checkout_city = self.handle_exceptions(self.CHECKOUT_FORM_CITY)
-        # while checkout_city.get_attribute("value") == "" and time.time() < timeout:
-        #     checkout_city.send_keys(test_data["city"])
-        # checkout_card = self.handle_exceptions(self.CHECKOUT_FORM_CARD)
-        # while checkout_card.get_attribute("value") == "" and time.time() < timeout:
-        #     checkout_card.send_keys(test_data["card"])
-        # checkout_month = self.handle_exceptions(self.CHECKOUT_FORM_MONTH)
-        # while checkout_month.get_attribute("value") == "" and time.time() < timeout:
-        #     checkout_month.send_keys(test_data["month"])
-        # checkout_year = self.handle_exceptions(self.CHECKOUT_FORM_YEAR)
-        # while checkout_year.get_attribute("value") == "" and time.time() < timeout:
-        #     checkout_year.send_keys(test_data["year"])
