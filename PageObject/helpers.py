@@ -5,30 +5,36 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 import time
 
-def handle_exceptions(driver, object):
+class Helpers():
 
-        try:
-            element = driver.find_element(*object)
+    def __init__(self, driver):
 
-        except (StaleElementReferenceException, NoSuchElementException):
-            element = WebDriverWait(driver,5).until(EC.presence_of_element_located(object))
-            
-        return element
+        self.driver = driver
+        
+    def handle_exceptions(self, object):
 
-def send_keys_to_elem(driver, object, test_data):
+            try:
+                element = self.driver.find_element(*object)
 
-    element = handle_exceptions(driver, object)
-    timeout = time.time() + 10
+            except (StaleElementReferenceException, NoSuchElementException):
+                element = WebDriverWait(self.driver,5).until(EC.presence_of_element_located(object))
+                
+            return element
 
-    while element.get_attribute("value") == "" and time.time() < timeout:
-        element.send_keys(test_data)
+    def send_keys_to_elem(self, object, test_data):
 
-def click_element(driver, object):
+        element = self.handle_exceptions(object)
+        timeout = time.time() + 10
 
-        element = handle_exceptions(driver, object)
-        element.click()
+        while element.get_attribute("value") == "" and time.time() < timeout:
+            element.send_keys(test_data)
 
-def get_element(driver, object):
+    def click_element(self, object):
 
-    return handle_exceptions(driver, object)
+            element = self.handle_exceptions(object)
+            element.click()
+
+    def get_element(self, object):
+
+        return self.handle_exceptions(object)
 

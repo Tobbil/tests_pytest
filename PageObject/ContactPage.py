@@ -1,13 +1,13 @@
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from PageObject.BasePage import BasePage
-from PageObject import helpers as h
+from PageObject.helpers import Helpers
 
-class ContactPage(BasePage):
+class ContactPage:
 
     def __init__(self, driver):
-
+        global h
+        h = Helpers(driver)
         self.driver = driver
         self.CONTACT_EMAIL = (By.ID, "recipient-email")
         self.CONTACT_NAME = (By.ID, "recipient-name")
@@ -16,6 +16,6 @@ class ContactPage(BasePage):
 
     def fill_contact_fields(self, test_data):
 
-        h.send_keys_to_elem(self.driver,self.CONTACT_EMAIL,test_data["email"])
-        h.send_keys_to_elem(self.driver,self.CONTACT_NAME,test_data["name"])
-        h.send_keys_to_elem(self.driver,self.CONTACT_MESSAGE,test_data["message"])
+        h.send_keys_to_elem(self.CONTACT_EMAIL,test_data["email"])
+        h.send_keys_to_elem(self.CONTACT_NAME,test_data["name"])
+        h.send_keys_to_elem(self.CONTACT_MESSAGE,test_data["message"])

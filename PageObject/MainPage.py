@@ -1,9 +1,8 @@
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from PageObject.BasePage import BasePage
 
-class MainPage(BasePage):
+class MainPage:
 
     def __init__(self, driver):
 

@@ -1,6 +1,5 @@
 
 from unittest import TestLoader, TestSuite, TextTestRunner, TestCase
-
 import testtools
 from Tests.test_AddToCart import TestAddToCart
 from Tests.test_SendMessage import TestSendMessage

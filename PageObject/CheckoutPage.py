@@ -1,13 +1,13 @@
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from PageObject.BasePage import BasePage
-from PageObject import helpers as h
+from PageObject.helpers import Helpers
 
-class CheckoutPage(BasePage):
+class CheckoutPage:
 
     def __init__(self,driver):
-
+        global h
+        h = Helpers(driver)
         self.driver = driver
         self.CHECKOUT_TOTAL = (By.CSS_SELECTOR, "#orderModal #totalm")
         self.CHECKOUT_FORM_NAME = (By.CSS_SELECTOR, "#orderModal #name")
@@ -26,7 +26,7 @@ class CheckoutPage(BasePage):
 
         while time.time() < timeout:
 
-            element = h.get_element(self.driver, self.CHECKOUT_TOTAL)
+            element = h.get_element(self.CHECKOUT_TOTAL)
             if len(element.text) > 0:
                 break
         
@@ -36,9 +36,9 @@ class CheckoutPage(BasePage):
 
     def fill_checkout_form(self, test_data):
         
-        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_NAME,test_data["name"])
-        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_COUNTRY,test_data["country"])
-        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_CITY,test_data["city"])
-        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_CARD,test_data["card"])
-        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_MONTH,test_data["month"])
-        h.send_keys_to_elem(self.driver,self.CHECKOUT_FORM_YEAR,test_data["year"])
+        h.send_keys_to_elem(self.CHECKOUT_FORM_NAME,test_data["name"])
+        h.send_keys_to_elem(self.CHECKOUT_FORM_COUNTRY,test_data["country"])
+        h.send_keys_to_elem(self.CHECKOUT_FORM_CITY,test_data["city"])
+        h.send_keys_to_elem(self.CHECKOUT_FORM_CARD,test_data["card"])
+        h.send_keys_to_elem(self.CHECKOUT_FORM_MONTH,test_data["month"])
+        h.send_keys_to_elem(self.CHECKOUT_FORM_YEAR,test_data["year"])

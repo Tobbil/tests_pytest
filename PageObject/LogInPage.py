@@ -1,13 +1,13 @@
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from PageObject.BasePage import BasePage
-from PageObject import helpers as h
+from PageObject.helpers import Helpers
 
-class LogInPage(BasePage):
+class LogInPage:
 
     def __init__(self,driver):
-
+        global h
+        h = Helpers(driver)
         self.driver = driver
         self.USERNAME = (By.ID, "loginusername")
         self.PASSWORD = (By.ID, "loginpassword")
@@ -15,7 +15,7 @@ class LogInPage(BasePage):
 
     def fill_username_and_password(self,test_data):
 
-        h.send_keys_to_elem(self.driver,self.USERNAME,test_data["username"])
-        h.send_keys_to_elem(self.driver,self.PASSWORD,test_data["password"])
+        h.send_keys_to_elem(self.USERNAME,test_data["username"])
+        h.send_keys_to_elem(self.PASSWORD,test_data["password"])
 
         
