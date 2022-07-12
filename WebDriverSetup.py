@@ -9,6 +9,7 @@ class WebDriverSetup(unittest.TestCase):
 
         self.driver = webdriver.Chrome(os.path.join(sys.path[0], "chromedriver"))
         self.driver.implicitly_wait(10)
+        self.driver.maximize_window()
 
     def tearDown(self):
 

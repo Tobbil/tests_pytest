@@ -5,7 +5,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 import time
 
-class Helpers():
+class Helpers:
 
     def __init__(self, driver):
 
