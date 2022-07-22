@@ -6,8 +6,7 @@ from PageObject.helpers import Helpers
 class CheckoutPage:
 
     def __init__(self,driver):
-        global h
-        h = Helpers(driver)
+        self.h = Helpers(driver)
         self.driver = driver
         self.CHECKOUT_TOTAL = (By.CSS_SELECTOR, "#orderModal #totalm")
         self.CHECKOUT_FORM_NAME = (By.CSS_SELECTOR, "#orderModal #name")
@@ -26,7 +25,7 @@ class CheckoutPage:
 
         while time.time() < timeout:
 
-            element = h.get_element(self.CHECKOUT_TOTAL)
+            element = self.h.get_element(self.CHECKOUT_TOTAL)
             if len(element.text) > 0:
                 break
         
@@ -36,9 +35,9 @@ class CheckoutPage:
 
     def fill_checkout_form(self, test_data):
         
-        h.send_keys_to_elem(self.CHECKOUT_FORM_NAME,test_data["name"])
-        h.send_keys_to_elem(self.CHECKOUT_FORM_COUNTRY,test_data["country"])
-        h.send_keys_to_elem(self.CHECKOUT_FORM_CITY,test_data["city"])
-        h.send_keys_to_elem(self.CHECKOUT_FORM_CARD,test_data["card"])
-        h.send_keys_to_elem(self.CHECKOUT_FORM_MONTH,test_data["month"])
-        h.send_keys_to_elem(self.CHECKOUT_FORM_YEAR,test_data["year"])
+        self.h.send_keys_to_elem(self.CHECKOUT_FORM_NAME,test_data["name"])
+        self.h.send_keys_to_elem(self.CHECKOUT_FORM_COUNTRY,test_data["country"])
+        self.h.send_keys_to_elem(self.CHECKOUT_FORM_CITY,test_data["city"])
+        self.h.send_keys_to_elem(self.CHECKOUT_FORM_CARD,test_data["card"])
+        self.h.send_keys_to_elem(self.CHECKOUT_FORM_MONTH,test_data["month"])
+        self.h.send_keys_to_elem(self.CHECKOUT_FORM_YEAR,test_data["year"])

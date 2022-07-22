@@ -6,8 +6,7 @@ from PageObject.helpers import Helpers
 class SignUpPage:
 
     def __init__(self,driver):
-        global h
-        h = Helpers(driver)
+        self.h = Helpers(driver)
         self.driver = driver
         self.USERNAME = (By.ID, "sign-username")
         self.PASSWORD = (By.ID, "sign-password")
@@ -15,5 +14,5 @@ class SignUpPage:
 
     def fill_username_and_password(self,test_data):
 
-        h.send_keys_to_elem(self.USERNAME,test_data["username"])
-        h.send_keys_to_elem(self.PASSWORD,test_data["password"])
+        self.h.send_keys_to_elem(self.USERNAME,test_data["username"])
+        self.h.send_keys_to_elem(self.PASSWORD,test_data["password"])

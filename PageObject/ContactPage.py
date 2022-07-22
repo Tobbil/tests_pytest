@@ -6,8 +6,7 @@ from PageObject.helpers import Helpers
 class ContactPage:
 
     def __init__(self, driver):
-        global h
-        h = Helpers(driver)
+        self.h = Helpers(driver)
         self.driver = driver
         self.CONTACT_EMAIL = (By.ID, "recipient-email")
         self.CONTACT_NAME = (By.ID, "recipient-name")
@@ -16,6 +15,6 @@ class ContactPage:
 
     def fill_contact_fields(self, test_data):
 
-        h.send_keys_to_elem(self.CONTACT_EMAIL,test_data["email"])
-        h.send_keys_to_elem(self.CONTACT_NAME,test_data["name"])
-        h.send_keys_to_elem(self.CONTACT_MESSAGE,test_data["message"])
+        self.h.send_keys_to_elem(self.CONTACT_EMAIL,test_data["email"])
+        self.h.send_keys_to_elem(self.CONTACT_NAME,test_data["name"])
+        self.h.send_keys_to_elem(self.CONTACT_MESSAGE,test_data["message"])
