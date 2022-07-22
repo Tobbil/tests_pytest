@@ -13,10 +13,6 @@ class Helpers:
         
     def handle_exceptions(self, object):
 
-            # try:
-            #     element = self.driver.find_element(*object)
-
-            # except (StaleElementReferenceException, NoSuchElementException):
             element = WebDriverWait(self.driver,10).until(EC.presence_of_element_located(object))
                 
             return element
