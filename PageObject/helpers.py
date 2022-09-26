@@ -27,10 +27,10 @@ class Helpers:
 
     def click_element(self, object):
 
-            element = self.handle_exceptions(object)
-            element.click()
+        element = self.handle_exceptions(object)
+        element.click()
 
     def get_element(self, object):
-
+        
         return self.handle_exceptions(object)
 
